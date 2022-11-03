@@ -1,47 +1,56 @@
 package com.studiodigital24.scorpiusSoft.controllers;
 
 import com.studiodigital24.scorpiusSoft.entities.Enterprise;
-import com.studiodigital24.scorpiusSoft.services.EnterpriseServices;
+import com.studiodigital24.scorpiusSoft.services.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.List;
-
-@RestController()
-@RequestMapping("/enterprises")
+@Controller
 public class EnterpriseController {
+
+    private static final RedirectView REDIRECT_VIEW = new RedirectView();
     @Autowired
-    EnterpriseServices servicioEmpresa;
+    private EnterpriseService enterpriseService;
 
-    @GetMapping("")
-    public List<Enterprise> getEnterprises() {
-        return this.servicioEmpresa.getEnterprises();
+    // display list of employees
+    @GetMapping("/enterprise")
+    public String viewHomePage(Model model) {
+        model.addAttribute("listEnterprise", enterpriseService.getAllEnterprise());
+        return "enterprise";
     }
 
-    @GetMapping("/{id}")
-    public Enterprise getEnterprise(@PathVariable("id") int id) {
-        return this.servicioEmpresa.getEnterprise(id);
+    @GetMapping("/showNewEnterpriseForm")
+    public String showNewEnterpriseForm(Model model) {
+        // create model attribute to bind form data
+        Enterprise enterprise = new Enterprise();
+        model.addAttribute("enterprise", enterprise);
+        return "new_enterprise";
     }
 
-    @PostMapping("")
-    public RedirectView createEnterprise(@ModelAttribute Enterprise enterpriseNew, Model model) {
-        model.addAttribute(enterpriseNew);
-        this.servicioEmpresa.createEnterprise(enterpriseNew);
-        return new RedirectView("/enterprises");
+    @PostMapping("/saveEnterprise")
+    public RedirectView saveEnterprise(@ModelAttribute("enterprise") Enterprise enterprise) {
+        REDIRECT_VIEW.setUrl("/enterprise");
+        enterpriseService.saveEnterprise(enterprise);
+        return REDIRECT_VIEW;
     }
 
-    @PatchMapping("/{id}")
-    public RedirectView updateEnterprise(@PathVariable("id") long id, @RequestBody Enterprise datos) {
-        this.servicioEmpresa.updateEnterprise(id, datos);
-        return new RedirectView("/enterprises");
+    @GetMapping("/showFormForUpdateEnterprise/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
+        Enterprise enterprise = enterpriseService.getEnterpriseById(id);
+        model.addAttribute("enterprise", enterprise);
+        return "update_enterprise";
     }
 
-    @DeleteMapping("/{id}")
-    public RedirectView deleteEmpresa(@PathVariable("id") long id) {
-        this.servicioEmpresa.deleteEnterprise(id);
-        return new RedirectView("/enterprises");
+    @GetMapping("/deleteEnterprise/{id}")
+    public RedirectView deleteEnterprise(@PathVariable(value = "id") long id) {
+        REDIRECT_VIEW.setUrl("/enterprise");
+        this.enterpriseService.deleteEnterpriseById(id);
+        return REDIRECT_VIEW;
     }
-
 }
