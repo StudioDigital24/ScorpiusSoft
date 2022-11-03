@@ -598,70 +598,14 @@
 }
 </style>
     <script>
-/*
--------------------------------------------------
 
----   TOGGLE SIDEBAR | Vanilla Javascript
-
--------------------------------------------------
-*/
-
-let sidebar = document.querySelector(".sidebar");
-  let logoHeader = document.querySelector("#header");
-  let closeBtn = document.querySelector("#btn");
-  let searchBtn = document.querySelector(".bx-search");
-
-  closeBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("open");
-    logoHeader.classList.toggle("open");
-    menuBtnChange();//calling the function(optional)
-  });
-
-  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
-    sidebar.classList.toggle("open");
-    logoHeader.classList.toggle("open");
-    menuBtnChange(); //calling the function(optional)
-  });
-
-  // following are the code to change sidebar button(optional)
-  function menuBtnChange() {
-   if(sidebar.classList.contains("open")){
-     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
-   }else {
-     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
-   }
-  }
-
-/*
--------------------------------------------------
-
----   HEADER MENU SHRINK | Requires jQuery
-
--------------------------------------------------
-*/
-
-$(function(){
- var shrinkHeader = 21;
-  $(window).scroll(function() {
-    var scroll = getCurrentScroll();
-      if ( scroll >= shrinkHeader ) {
-           $('#header').addClass('shrink');
-        }
-        else {
-            $('#header').removeClass('shrink');
-        }
-  });
-function getCurrentScroll() {
-    return window.pageYOffset || document.documentElement.scrollTop;
-    }
-});
 </script>
 </head>
 
 <body>
 <div class="sidebar">
     <div class="logo-details">
-        <i class='bx bxl-c-plus-plus icon'></i>
+        <img width="20%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqf51ZKBKhst3pwRG5GD96cr8l8nMsuOerZliJRqOl1KADGzTGSnN6T5X0XgU_YHiizpM&usqp=CAU"></img>
         <div class="logo_name">ScorpiusSoft</div>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
@@ -672,7 +616,7 @@ function getCurrentScroll() {
             <span class="tooltip">Search</span>
         </li>
         <li>
-            <a href="index.html">
+            <a href="/">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Inicio</span>
             </a>
@@ -699,24 +643,9 @@ function getCurrentScroll() {
             </a>
             <span class="tooltip">Transacciones</span>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-folder' ></i>
-                <span class="links_name">Profile</span>
-            </a>
-            <span class="tooltip">Profile</span>
-        </li>
 
-        <li class="profile">
-            <div class="profile-details">
-                <img src="https://byjaris.com/code/img/p07.jpg" alt="profileImg">
-                <div class="name_job">
-                    <div class="name">Jaris GV</div>
-                    <div class="job">Web designer</div>
-                </div>
-            </div>
-            <i class='bx bx-log-out' id="log_out" ></i>
-        </li>
+
+
     </ul>
 </div>
 <section class="home-section">
@@ -725,16 +654,28 @@ function getCurrentScroll() {
         <div class="header uboxed">
             <ul class="logo">
                 <li>
-                    <img src="https://byjaris.com/img/byjaris.svg" alt="Fimanbol">
+
                 </li>
             </ul>
             <ul class="menu">
-                <li><img src="https://byjaris.com/code/icons/home-alt.svg" alt="Fimanbol"></li>
-
+                <li><a href="/"><img src="https://byjaris.com/code/icons/home-alt.svg" alt="Fimanbol"></a></li>
             </ul>
         </div>
     </div>
-    <div class="header-space"></div>
+    <div class="container my-2">
+        <div style="position: absolute; top: 20%;">
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center"><h1 style="text-align:center">BIENVENIDOS A SCORPIUSSOFT</h1>
+                        <h1 style="text-aling:center">By Luisa Maria Gil Garcia</h1>
+                        <img align="center" src="https://media.istockphoto.com/vectors/constellation-scorpius-zodiac-sign-vector-id842407570?k=20&m=842407570&s=170667a&w=0&h=p_DNXzYQopWN6gilQPkbbLdyx4LnwtC8yMrbwLAApLI="></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
 
 </section>
 
