@@ -14,7 +14,7 @@
 	<name>scorpiusSoft</name>
 	<description>Proyecto de un sistema de ingresos y egresos de una empresa. (MisionTic Ciclo 3)</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
