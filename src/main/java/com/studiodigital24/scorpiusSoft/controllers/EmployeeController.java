@@ -28,13 +28,13 @@ public class EmployeeController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/employee")
+    @GetMapping("employee")
     public String viewHomePage(Model model) {
         model.addAttribute("listEmployees", employeeService.getAllEmployees());
         return "employee";
     }
 
-    @GetMapping("/showNewEmployeeForm")
+    @GetMapping("showNewEmployeeForm")
     public String showNewEmployeeForm(Model model){
         Employee user= new Employee();
         List<Enterprise> departamentosSelect = enterpriseService.getAllEnterprise();
@@ -45,14 +45,14 @@ public class EmployeeController {
         return "new_employee";
     }
 
-    @PostMapping("/saveEmployee")
+    @PostMapping("saveEmployee")
     public RedirectView saveEmployee(@ModelAttribute("employee") Employee employee) {
         REDIRECT_VIEW.setUrl("/employee");
         employeeService.saveEmployee(employee);
         return REDIRECT_VIEW;
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
+    @GetMapping("showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
         Employee user = employeeService.getEmployeeById(id);
         List<Enterprise> departamentosSelect = enterpriseService.getAllEnterprise();
@@ -63,7 +63,7 @@ public class EmployeeController {
         return "update_employee";
     }
 
-    @GetMapping("/deleteEmployee/{id}")
+    @GetMapping("deleteEmployee/{id}")
     public RedirectView deleteEmployee(@PathVariable(value = "id") long id) {
         REDIRECT_VIEW.setUrl("/employee");
         this.employeeService.deleteEmployeeById(id);
